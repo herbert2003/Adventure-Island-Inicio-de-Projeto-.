@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private float _playerInitialSpeed;
     public float _playerRunSpeed;
     private Vector2 _playerDirection;
+     public int maxHealth = 100;
+    public int currentHealth;
 
     void Start()
     {
@@ -17,7 +19,10 @@ public class PlayerController : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
 
         _playerInitialSpeed = _playerSpeed;
+
+        currentHealth = maxHealth;
     }
+
 
     void Update()
     {
@@ -67,5 +72,24 @@ public class PlayerController : MonoBehaviour
             _playerSpeed = _playerInitialSpeed;
         }
     }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+
+    {
+        // Aqui você pode adicionar qualquer ação que deseja executar quando o personagem morre.
+        // Por exemplo, pode ser uma animação de morte, reiniciar o nível, exibir uma mensagem de "Game Over", etc.
+        Destroy(gameObject);
+    }
 }
+
 
